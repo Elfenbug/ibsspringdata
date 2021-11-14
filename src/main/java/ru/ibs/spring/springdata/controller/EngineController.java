@@ -3,6 +3,7 @@ package ru.ibs.spring.springdata.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.ibs.spring.springdata.entity.Engine;
+import ru.ibs.spring.springdata.exception_handling.NoSuchElementException;
 import ru.ibs.spring.springdata.service.EngineService;
 
 import java.util.List;
@@ -32,15 +33,25 @@ public class EngineController {
         return engine;
     }
 
-    @PutMapping("/engine/update")
-    public Engine updateEngine(@RequestBody Engine engine) {
-        engineService.saveEngine(engine);
+    @PostMapping("/engine/update/{id}")
+    public Engine updateEngine(@RequestBody Engine engine, @PathVariable Long id) {
+        engineService.updateEngine(engine, id);
         return engine;
     }
 
-    @DeleteMapping("/engine/{id}")
+    @PostMapping("/engine/update/")
+    public Engine updateEngine() {
+        throw new NoSuchElementException("Please use valid id");
+    }
+
+    @PostMapping("/engine/delete/{id}")
     public String deleteEngine(@PathVariable Long id) {
         engineService.deleteEngine(id);
         return "Engine with ID = " + id + "was deleted";
+    }
+
+    @PostMapping("/engine/delete/")
+    public String noIDtoDelete() {
+        throw new NoSuchElementException("Please, select ID to delete");
     }
 }

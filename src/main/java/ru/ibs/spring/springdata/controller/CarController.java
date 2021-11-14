@@ -35,21 +35,18 @@ public class CarController {
     }
 
     @PostMapping("/car/update/{id}")
-    public Car updateCar(@PathVariable Long id) {
-        if (id == null) {
-            throw new NoSuchElementException("No element with id = " + id);
-        }
-        Car car = carService.getCar(id);
-        carService.saveCar(car);
+    public Car updateCar(@RequestBody Car car, @PathVariable Long id) {
+        carService.updateCar(car, id);
         return car;
     }
 
+    @PostMapping("/car/update/")
+    public Car updateCar() {
+            throw new NoSuchElementException("Please use valid id");
+        }
+
     @PostMapping("/car/delete/{id}")
     public String deleteCar(@PathVariable Long id) {
-        Car car = carService.getCar(id);
-        if (car == null) {
-            throw new NoSuchElementException("No element with id = " + id);
-        }
         carService.deleteCar(id);
         return "Car with ID = " + id + " was deleted";
     }

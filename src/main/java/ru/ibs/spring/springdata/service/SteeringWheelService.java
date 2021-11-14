@@ -13,4 +13,6 @@ public interface SteeringWheelService {
     SteeringWheel getSteeringWheel(Long id);
 
     void deleteSteeringWheel(Long id);
+
+    void updateSteerlingWheel(SteeringWheel steeringWheel, Long id);
 }

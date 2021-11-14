@@ -12,4 +12,6 @@ public interface ManualService {
     Manual getManual(Long id);
 
     void deleteManual(Long id);
+
+    void updateManual(Manual manual, Long id);
 }

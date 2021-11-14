@@ -28,7 +28,7 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
     public SteeringWheel getSteeringWheel(Long id) {
         SteeringWheel steeringWheel = null;
         Optional<SteeringWheel> optional = steeringWheelRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             steeringWheel = optional.get();
         }
         return steeringWheel;
@@ -37,5 +37,14 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
     @Override
     public void deleteSteeringWheel(Long id) {
         steeringWheelRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateSteerlingWheel(SteeringWheel steeringWheel, Long id) {
+        Optional<SteeringWheel> optional = steeringWheelRepository.findById(id);
+        if (optional.isPresent()) {
+            steeringWheel = optional.get();
+        }
+        steeringWheelRepository.save(steeringWheel);
     }
 }

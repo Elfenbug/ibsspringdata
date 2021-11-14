@@ -1,6 +1,9 @@
 package ru.ibs.spring.springdata.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +28,8 @@ public class Manual {
     @JoinTable(name = "engine_manual"
             , joinColumns = @JoinColumn(name = "manuals_id")
             , inverseJoinColumns = @JoinColumn(name = "engines_id"))
-    @JsonManagedReference
+    @JsonIgnore
+    //@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
     private List<Engine> engines;
 
     public Manual(String type) {

@@ -1,8 +1,7 @@
 package ru.ibs.spring.springdata.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Engine {
 
     @Id
@@ -25,18 +25,19 @@ public class Engine {
     private String type;
 
     @OneToOne(mappedBy = "engine", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference("car-engine")
     private Car car;
 
     @OneToMany(mappedBy = "engine", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference("gear-engine")
     private List<Gear> gears;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "engine_manual"
             , joinColumns = @JoinColumn(name = "engines_id")
             , inverseJoinColumns = @JoinColumn(name = "manuals_id"))
-    @JsonBackReference
+    //@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
+    //@JsonIgnore
     private List<Manual> manuals;
 
     public Engine(String engineType) {

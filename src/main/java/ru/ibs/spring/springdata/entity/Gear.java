@@ -23,7 +23,8 @@ public class Gear {
 
     @ManyToOne
     @JoinColumn(name = "engine_id")
-    @JsonManagedReference
+    @JsonIgnore
+   // @JsonManagedReference("gear-engine")
     private Engine engine;
 
 

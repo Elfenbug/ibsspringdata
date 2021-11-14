@@ -1,6 +1,7 @@
 package ru.ibs.spring.springdata.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +10,12 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="car")
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="id")
     private Long id;
 
@@ -25,12 +27,12 @@ public class Car {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="engine_id")
-    @JsonManagedReference
+    @JsonManagedReference("car-engine")
     private Engine engine;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "steering_wheel_id")
-    @JsonManagedReference
+    @JsonManagedReference("car-steeringWheel")
     private SteeringWheel steeringWheel;
 
     public Car(String manufacturerName, String modelName) {

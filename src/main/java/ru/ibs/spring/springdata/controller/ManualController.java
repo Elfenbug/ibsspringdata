@@ -3,6 +3,7 @@ package ru.ibs.spring.springdata.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.ibs.spring.springdata.entity.Manual;
+import ru.ibs.spring.springdata.exception_handling.NoSuchElementException;
 import ru.ibs.spring.springdata.service.ManualService;
 
 import java.util.List;
@@ -32,15 +33,25 @@ public class ManualController {
         return manual;
     }
 
-    @PutMapping("/manual/update")
-    public Manual updateManual(@RequestBody Manual manual) {
-        manualService.saveManual(manual);
+    @PostMapping("/manual/update/{id}")
+    public Manual updateManual(@RequestBody Manual manual, @PathVariable Long id) {
+        manualService.updateManual(manual, id);
         return manual;
     }
 
-    @DeleteMapping("/manual/delete/{id}")
+    @PostMapping("/manual/update")
+    public Manual updateManual() {
+        throw new NoSuchElementException("Please use valid id");
+    }
+
+    @PostMapping("/manual/delete/{id}")
     public String deleteManual(@PathVariable Long id) {
         manualService.deleteManual(id);
         return "Manual with ID = " + id + "was deleted";
+    }
+
+    @PostMapping("/manual/delete/")
+    public String noIdToDelete(@PathVariable Long id) {
+        throw new NoSuchElementException("Please, select ID to delete");
     }
 }

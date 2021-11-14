@@ -29,7 +29,7 @@ public class CarServiceImpl implements CarService {
     public Car getCar(Long id) {
         Car car = null;
         Optional<Car> optional = carRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             car = optional.get();
         }
         return car;
@@ -38,6 +38,15 @@ public class CarServiceImpl implements CarService {
     @Override
     public void deleteCar(Long id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateCar(Car car, Long id) {
+        Optional<Car> optional = carRepository.findById(id);
+        if (optional.isPresent()) {
+            car = optional.get();
+        }
+        carRepository.save(car);
     }
 
 

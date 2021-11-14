@@ -13,6 +13,8 @@ public interface GearService {
 
     void deleteGear(Long id);
 
+    void updateGear(Gear gear, Long id);
+
 //    Gear findGear(Car car);
 //    List<Gear> findGears(Car car);
 }

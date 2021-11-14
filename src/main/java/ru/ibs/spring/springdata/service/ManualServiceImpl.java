@@ -38,4 +38,13 @@ public class ManualServiceImpl implements ManualService{
     public void deleteManual(Long id) {
         manualRepository.deleteById(id);
     }
+
+    @Override
+    public void updateManual(Manual manual, Long id) {
+        Optional<Manual> optional = manualRepository.findById(id);
+        if (optional.isPresent()) {
+            manual = optional.get();
+        }
+        manualRepository.save(manual);
+    }
 }

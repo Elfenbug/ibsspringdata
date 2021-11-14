@@ -39,4 +39,13 @@ public class EngineServiceImpl implements EngineService {
     public void deleteEngine(Long id) {
         engineRepository.deleteById(id);
     }
+
+    @Override
+    public void updateEngine(Engine engine, Long id) {
+        Optional<Engine> optional = engineRepository.findById(id);
+        if (optional.isPresent()) {
+            engine = optional.get();
+        }
+        engineRepository.save(engine);
+    }
 }

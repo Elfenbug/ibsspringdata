@@ -2,7 +2,9 @@ package ru.ibs.spring.springdata.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.ibs.spring.springdata.entity.Car;
 import ru.ibs.spring.springdata.entity.Gear;
+import ru.ibs.spring.springdata.exception_handling.NoSuchElementException;
 import ru.ibs.spring.springdata.service.GearService;
 
 import java.util.List;
@@ -32,15 +34,25 @@ public class GearController {
         return gear;
     }
 
-    @PutMapping("/gear/update")
-    public Gear updateGear(@RequestBody Gear gear) {
-        gearService.saveGear(gear);
+    @PostMapping("/gear/update/{id}")
+    public Gear updateGear(@RequestBody Gear gear, @PathVariable Long id) {
+        gearService.updateGear(gear, id);
         return gear;
     }
 
-    @DeleteMapping("/gear/delete/{id}")
+    @PostMapping("/gear/update")
+    public Car updateCar() {
+        throw new NoSuchElementException("Please use valid id");
+    }
+
+    @PostMapping("/gear/delete/{id}")
     public String deleteGear(@PathVariable Long id) {
         gearService.deleteGear(id);
         return "Gear with ID = " + id + "was deleted";
+    }
+
+    @PostMapping("/gear/delete")
+    public String noIdToDelete() {
+        throw new NoSuchElementException("Please, select ID to delete");
     }
 }

@@ -13,4 +13,6 @@ public interface EngineService {
     Engine getEngine(Long id);
 
     void deleteEngine(Long id);
+
+    void updateEngine(Engine engine, Long id);
 }

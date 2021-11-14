@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<CarIncorrectId> handleException(NoSuchElementException exception) {
-        CarIncorrectId data = new CarIncorrectId();
-        data.setInfo(exception.getMessage());
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+        CarIncorrectId id = new CarIncorrectId();
+        id.setInfo(exception.getMessage());
+        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 }

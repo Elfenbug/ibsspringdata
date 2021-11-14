@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.ibs.spring.springdata.entity.SteeringWheel;
+import ru.ibs.spring.springdata.exception_handling.NoSuchElementException;
 import ru.ibs.spring.springdata.service.SteeringWheelService;
 
 import java.util.List;
@@ -27,21 +28,31 @@ public class SteeringWheelController {
         return steeringWheel;
     }
 
-    @PostMapping(value ="/steeringwheel/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/steeringwheel/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public SteeringWheel addNewSteeringWheel(@RequestBody SteeringWheel steeringWheel) {
         steeringWheelService.saveSteeringWheel(steeringWheel);
         return steeringWheel;
     }
 
-    @PutMapping("/steeringwheel/update")
-    public SteeringWheel updateSteeringWheel(@RequestBody SteeringWheel steeringWheel) {
-        steeringWheelService.saveSteeringWheel(steeringWheel);
+    @PostMapping("/steeringwheel/update/{id}")
+    public SteeringWheel updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable Long id) {
+        steeringWheelService.updateSteerlingWheel(steeringWheel, id);
         return steeringWheel;
     }
 
-    @DeleteMapping("/steeringwheel/delete/{id}")
+    @PostMapping("/steeringwheel/update")
+    public SteeringWheel updateSteeringWheel() {
+        throw new NoSuchElementException("Please use valid id");
+    }
+
+    @PostMapping("/steeringwheel/delete/{id}")
     public String deleteSteeringWheel(@PathVariable Long id) {
         steeringWheelService.deleteSteeringWheel(id);
         return "SteeringWheel with ID = " + id + "was deleted";
+    }
+
+    @PostMapping("/steeringwheel/delete")
+    public String noIdToDelete() {
+        throw new NoSuchElementException("Please, select ID to delete");
     }
 }

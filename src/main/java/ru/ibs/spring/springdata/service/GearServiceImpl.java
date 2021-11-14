@@ -28,7 +28,7 @@ public class GearServiceImpl implements GearService {
     public Gear getGear(Long id) {
         Gear gear = null;
         Optional<Gear> optional = gearRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             gear = optional.get();
         }
         return gear;
@@ -38,6 +38,16 @@ public class GearServiceImpl implements GearService {
     public void deleteGear(Long id) {
         gearRepository.deleteById(id);
     }
+
+    @Override
+    public void updateGear(Gear gear, Long id) {
+        Optional<Gear> optional = gearRepository.findById(id);
+        if (optional.isPresent()) {
+            gear = optional.get();
+        }
+        gearRepository.save(gear);
+    }
+}
 
 //    @Override
 //    public Gear findGear(Car car) {
@@ -49,4 +59,3 @@ public class GearServiceImpl implements GearService {
 //    public List<Gear> findGears(Car car) {
 //        return gearRepository.findGearsByEngineId(car.getEngine().getId());
 //    }
-}

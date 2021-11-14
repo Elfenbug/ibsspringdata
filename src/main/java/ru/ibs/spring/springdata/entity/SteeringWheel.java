@@ -1,6 +1,7 @@
 package ru.ibs.spring.springdata.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class SteeringWheel {
 
     @Id
@@ -20,7 +22,7 @@ public class SteeringWheel {
     String type;
 
     @OneToOne(mappedBy = "steeringWheel")
-    @JsonBackReference
+    @JsonBackReference("car-steeringWheel")
     private Car car;
 
     public SteeringWheel(String type) {
