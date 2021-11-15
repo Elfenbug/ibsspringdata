@@ -35,9 +35,8 @@ public class GearController {
     }
 
     @PostMapping("/gear/update/{id}")
-    public Gear updateGear(@RequestBody Gear gear, @PathVariable Long id) {
+    public void updateGear(@RequestBody Gear gear, @PathVariable Long id) {
         gearService.updateGear(gear, id);
-        return gear;
     }
 
     @PostMapping("/gear/update")

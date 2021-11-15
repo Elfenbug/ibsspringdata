@@ -1,12 +1,12 @@
-package ru.ibs.spring.springdata.service;
+package ru.ibs.spring.springdata.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ibs.spring.springdata.dao.GearRepository;
 import ru.ibs.spring.springdata.entity.Gear;
+import ru.ibs.spring.springdata.service.GearService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GearServiceImpl implements GearService {
@@ -26,12 +26,7 @@ public class GearServiceImpl implements GearService {
 
     @Override
     public Gear getGear(Long id) {
-        Gear gear = null;
-        Optional<Gear> optional = gearRepository.findById(id);
-        if (optional.isPresent()) {
-            gear = optional.get();
-        }
-        return gear;
+        return gearRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -41,11 +36,10 @@ public class GearServiceImpl implements GearService {
 
     @Override
     public void updateGear(Gear gear, Long id) {
-        Optional<Gear> optional = gearRepository.findById(id);
-        if (optional.isPresent()) {
-            gear = optional.get();
+        if (gearRepository.findById(id).orElse(null) != null) {
+            gear.setId(id);
+            gearRepository.save(gear);
         }
-        gearRepository.save(gear);
     }
 }
 

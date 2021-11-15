@@ -34,9 +34,8 @@ public class ManualController {
     }
 
     @PostMapping("/manual/update/{id}")
-    public Manual updateManual(@RequestBody Manual manual, @PathVariable Long id) {
+    public void updateManual(@RequestBody Manual manual, @PathVariable Long id) {
         manualService.updateManual(manual, id);
-        return manual;
     }
 
     @PostMapping("/manual/update")

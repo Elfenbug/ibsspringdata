@@ -1,23 +1,19 @@
 {
-    "id": 13,
+    "id": 1,
     "manufacturerName": "AUDI",
     "modelName": "Q7",
     "engine": {
-        "id": 23,
         "type": "R4 petrol engine",
         "manuals": [
             {
-                "id": 9,
-                "type": "Cylinder head manual for R4 petrol engine"
+                "type": "Cylinder head manual for R4 petrol engine5555555"
             },
             {
-                "id": 10,
-                "type": "Electrics manual for R4 petrol engine"
+                "type": "Electrics manual for R4 petrol engine5555555555"
 }
         ]
     },
     "steeringWheel": {
-        "id": 56,
-        "type": "BMW X7 steering wheel"
+        "type": "BMW X7 steering wheel555555"
     }
 }

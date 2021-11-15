@@ -1,12 +1,12 @@
-package ru.ibs.spring.springdata.service;
+package ru.ibs.spring.springdata.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ibs.spring.springdata.dao.EngineRepository;
 import ru.ibs.spring.springdata.entity.Engine;
+import ru.ibs.spring.springdata.service.EngineService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EngineServiceImpl implements EngineService {
@@ -27,12 +27,7 @@ public class EngineServiceImpl implements EngineService {
 
     @Override
     public Engine getEngine(Long id) {
-        Engine engine = null;
-        Optional<Engine> optional = engineRepository.findById(id);
-        if(optional.isPresent()) {
-            engine = optional.get();
-        }
-        return engine;
+        return engineRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -42,10 +37,9 @@ public class EngineServiceImpl implements EngineService {
 
     @Override
     public void updateEngine(Engine engine, Long id) {
-        Optional<Engine> optional = engineRepository.findById(id);
-        if (optional.isPresent()) {
-            engine = optional.get();
+        if (engineRepository.findById(id).orElse(null) != null) {
+            engine.setId(id);
+            engineRepository.save(engine);
         }
-        engineRepository.save(engine);
     }
 }

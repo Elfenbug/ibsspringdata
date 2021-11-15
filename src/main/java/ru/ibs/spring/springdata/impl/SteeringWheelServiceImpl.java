@@ -1,12 +1,12 @@
-package ru.ibs.spring.springdata.service;
+package ru.ibs.spring.springdata.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ibs.spring.springdata.dao.SteeringWheelRepository;
 import ru.ibs.spring.springdata.entity.SteeringWheel;
+import ru.ibs.spring.springdata.service.SteeringWheelService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SteeringWheelServiceImpl implements SteeringWheelService {
@@ -26,12 +26,7 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
 
     @Override
     public SteeringWheel getSteeringWheel(Long id) {
-        SteeringWheel steeringWheel = null;
-        Optional<SteeringWheel> optional = steeringWheelRepository.findById(id);
-        if (optional.isPresent()) {
-            steeringWheel = optional.get();
-        }
-        return steeringWheel;
+        return steeringWheelRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -41,10 +36,9 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
 
     @Override
     public void updateSteerlingWheel(SteeringWheel steeringWheel, Long id) {
-        Optional<SteeringWheel> optional = steeringWheelRepository.findById(id);
-        if (optional.isPresent()) {
-            steeringWheel = optional.get();
+        if (steeringWheelRepository.findById(id).orElse(null) != null) {
+            steeringWheel.setId(id);
+            steeringWheelRepository.save(steeringWheel);
         }
-        steeringWheelRepository.save(steeringWheel);
     }
 }

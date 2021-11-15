@@ -1,13 +1,13 @@
-package ru.ibs.spring.springdata.service;
+package ru.ibs.spring.springdata.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.ibs.spring.springdata.entity.*;
 import ru.ibs.spring.springdata.dao.CarRepository;
+import ru.ibs.spring.springdata.entity.Car;
+import ru.ibs.spring.springdata.service.CarService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -27,12 +27,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getCar(Long id) {
-        Car car = null;
-        Optional<Car> optional = carRepository.findById(id);
-        if (optional.isPresent()) {
-            car = optional.get();
-        }
-        return car;
+        return carRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -42,11 +37,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void updateCar(Car car, Long id) {
-        Optional<Car> optional = carRepository.findById(id);
-        if (optional.isPresent()) {
-            car = optional.get();
+        if (carRepository.findById(id).orElse(null) != null) {
+            car.setId(id);
+            carRepository.save(car);
         }
-        carRepository.save(car);
     }
 
 

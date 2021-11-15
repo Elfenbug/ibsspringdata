@@ -1,5 +1,4 @@
 {
-    "id": 13,
     "manufacturerName": "BMW",
     "modelName": "X5",
     "engine": {
@@ -7,17 +6,14 @@
         "type": "R4 petrol engine",
         "manuals": [
             {
-                "id": 9,
-                "type": "Cylinder head manual for R4 petrol engine"
+                "type": "Cylinder head manual for R4 petrol engine22"
             },
             {
-                "id": 10,
-                "type": "Electrics manual for R4 petrol engine"
+                "type": "Electrics manual for R4 petrol engine222"
 }
         ]
     },
     "steeringWheel": {
-        "id": 56,
-        "type": "BMW X5 steering wheel"
+        "type": "BMW X5 steering wheel222"
     }
 }

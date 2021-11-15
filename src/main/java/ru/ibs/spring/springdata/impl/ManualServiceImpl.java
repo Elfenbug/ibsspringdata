@@ -1,15 +1,15 @@
-package ru.ibs.spring.springdata.service;
+package ru.ibs.spring.springdata.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ibs.spring.springdata.dao.ManualRepository;
 import ru.ibs.spring.springdata.entity.Manual;
+import ru.ibs.spring.springdata.service.ManualService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class ManualServiceImpl implements ManualService{
+public class ManualServiceImpl implements ManualService {
 
     @Autowired
     ManualRepository manualRepository;
@@ -26,12 +26,7 @@ public class ManualServiceImpl implements ManualService{
 
     @Override
     public Manual getManual(Long id) {
-        Manual manual = null;
-        Optional<Manual> optional = manualRepository.findById(id);
-        if(optional.isPresent()) {
-            manual = optional.get();
-        }
-        return manual;
+        return manualRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -41,10 +36,9 @@ public class ManualServiceImpl implements ManualService{
 
     @Override
     public void updateManual(Manual manual, Long id) {
-        Optional<Manual> optional = manualRepository.findById(id);
-        if (optional.isPresent()) {
-            manual = optional.get();
+        if (manualRepository.findById(id).orElse(null) != null) {
+            manual.setId(id);
+            manualRepository.save(manual);
         }
-        manualRepository.save(manual);
     }
 }

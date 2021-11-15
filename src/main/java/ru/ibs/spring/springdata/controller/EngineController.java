@@ -34,9 +34,8 @@ public class EngineController {
     }
 
     @PostMapping("/engine/update/{id}")
-    public Engine updateEngine(@RequestBody Engine engine, @PathVariable Long id) {
+    public void updateEngine(@RequestBody Engine engine, @PathVariable Long id) {
         engineService.updateEngine(engine, id);
-        return engine;
     }
 
     @PostMapping("/engine/update/")

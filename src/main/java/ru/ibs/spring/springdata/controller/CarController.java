@@ -35,9 +35,8 @@ public class CarController {
     }
 
     @PostMapping("/car/update/{id}")
-    public Car updateCar(@RequestBody Car car, @PathVariable Long id) {
+    public void updateCar(@RequestBody Car car, @PathVariable Long id) {
         carService.updateCar(car, id);
-        return car;
     }
 
     @PostMapping("/car/update/")

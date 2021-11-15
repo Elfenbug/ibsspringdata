@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CarIncorrectId {
+public class IncorrectId {
     private String info;
 }

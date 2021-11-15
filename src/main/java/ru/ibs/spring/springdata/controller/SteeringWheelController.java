@@ -35,9 +35,8 @@ public class SteeringWheelController {
     }
 
     @PostMapping("/steeringwheel/update/{id}")
-    public SteeringWheel updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable Long id) {
+    public void updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable Long id) {
         steeringWheelService.updateSteerlingWheel(steeringWheel, id);
-        return steeringWheel;
     }
 
     @PostMapping("/steeringwheel/update")
