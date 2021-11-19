@@ -1,4 +1,4 @@
-package ru.ibs.spring.springdata.impl;
+package ru.ibs.spring.springdata.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
